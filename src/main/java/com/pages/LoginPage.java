@@ -2,6 +2,9 @@ package com.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
 
@@ -15,7 +18,8 @@ public class LoginPage {
 	private By forgotPwdLink = By.xpath("//a[normalize-space()='Forgot your password']");
 	private By cookieConsent = By.xpath("//span[text()='Accept']");
 	private By loginLink = By.xpath("//li[@class='header-link']/a/span[contains(text(),'Login')]");
-
+	private By avatarCard = By.xpath("//li[@class='user-profile']/a/div[@class='avatar-placeholder']");
+	
 	// 2. Constructor of the page class:
 	public LoginPage(WebDriver driver) {
 		this.driver = driver;
@@ -51,5 +55,13 @@ public class LoginPage {
 	
 	public void clickOnLoginLink(){
 		driver.findElement(loginLink).click();
+	}
+	
+	public void waitForAvatarCard(Integer waitTime){
+		WebDriverWait wait = new WebDriverWait(driver, waitTime);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(avatarCard));
+	}
+	public String readAvatarCard(){
+		return driver.findElement(avatarCard).getText();
 	}
 }

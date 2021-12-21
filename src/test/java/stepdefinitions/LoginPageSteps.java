@@ -20,37 +20,33 @@ public class LoginPageSteps {
 		DriverFactory.getDriver().get(applicationUrl);
 	}
 
-	@When("user accept cookies consent")
+	@And("user accept cookies consent")
 	public void use_accept_cookies_consent(){
 		loginPage.acceptCookies();
 	}
 	
-	@And("user clicks on Login link")
+	@When("user clicks on Login link")
 	public void click_on_login_link(){
 		loginPage.clickOnLoginLink();
 	}
 	
-	@When("user gets the title of the page")
+	@Then("user gets the title of the page")
 	public void user_gets_the_title_of_the_page() {
 		title = loginPage.getLoginPageTitle();
 		System.out.println("Page title is: " + title);
 	}
 		
 	@Then("page title should be {string}")
+	@And("page title must be {string}")
 	public void page_title_should_be(String expectedTitleName) {
 		Assert.assertTrue(title.contains(expectedTitleName));
 	}
-	
-	@And("page title must be {string}")
-	public void page_title_must_be(String expectedTitleName) {
-		Assert.assertTrue(title.contains(expectedTitleName));
-	}
 
-	@When("user enters username {string}")
+	@And("user enters username {string}")
 	public void user_enters_username(String username)
 	{
 		loginPage.enterUserName(username);
-	    }
+	}
 
 	@And("user enters password {string}")
 	public void user_enters_password(String password) 
@@ -63,13 +59,16 @@ public class LoginPageSteps {
 	{
 		loginPage.clickOnLogin();
 	}
-
-	@Then("^user gets the title of the Home page$")
-	public void user_gets_the_title_of_the_home_page()
-	{
-		title = loginPage.getLoginPageTitle();
-		System.out.println("login page title is: " + title);
-	   }
-
-
+	
+	@Then("^wait for (.*) seconds to load avatar card$")
+	public void wait_for_avatar_card(int waitTime){
+		System.out.println("waiting " + waitTime + " seconds for element: Avatar card");
+		loginPage.waitForAvatarCard(waitTime);
+		
+	}
+	
+	@And("logged in avathar card should be {string}")
+	public void logged_in_avathar_card_should_match(String cardName){
+		Assert.assertTrue(cardName.equals(loginPage.readAvatarCard()));
+	}
 }
