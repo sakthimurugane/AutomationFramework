@@ -17,5 +17,4 @@
  And user enters password "Suresh#4"
  And user clicks on Login button
  Then user gets the title of the Home page
-# And page title must be "Rijksmuseum Amsterdam, home of the Dutch masters"
  And page title must be "Rijksmuseum"
