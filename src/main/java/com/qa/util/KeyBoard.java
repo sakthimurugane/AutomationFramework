@@ -9,11 +9,6 @@ public class KeyBoard {
 
 	private Robot robot;
 
-	public static void main(String... args) throws Exception {
-		KeyBoard keyboard = new KeyBoard();
-		keyboard.type("Hello there, how are you?");
-	}
-
 public KeyBoard() throws AWTException {
     this.robot = new Robot();
 }
